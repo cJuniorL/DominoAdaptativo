@@ -9,8 +9,6 @@ namespace DominoAdap.Modelo
     public class Domino
     {
         public List<Pedra> domino { get; set; } = new List<Pedra>();
-        public Jogador jogadorA { get; set; }
-        public Jogador jogadorB { get; set; }
         public List<Jogada> tabuleiro { get; set; } = new List<Jogada>();
         public List<Regra> regras { get; set; } = new List<Regra>();
 
@@ -20,8 +18,6 @@ namespace DominoAdap.Modelo
             for (int i = 0; i < 7; i++)
             {
                 Regra regra = new Regra();
-                regra.fAdpAnt = null;
-                regra.fAdpPos = null;
                 regra.id = i;
                 regra.l1 = i;
                 regra.l2 = i;
@@ -119,44 +115,55 @@ namespace DominoAdap.Modelo
             return escolhido;
         }
 
-        public void alterarRegra(Pedra pedra, bool lado) //True é no inicido do tabulero, False para o fim do tabuleiro
+        public char verficarGanhador(Jogador jogadorA, Jogador jogadorB) //A = jogadorA ganhou | B = jogadorB ganhou | C = houve um empate | D = jogo ainda não finalizado
         {
-            //if (lado)
-            //{
-            //    for (int i = 0; i < regras.Count; i++)
-            //    {
-            //        if (regras[i].l1 == pedra.l2)
-            //        {
-            //            regras[i].l2 = tabuleiro[0].pedra.l1;
-            //            i = regras.Count;
-            //        }
-            //    }
-            //    for (int i = 0; i < regras.Count; i++)
-            //    {
-            //        if (regras[i].l1 == tabuleiro[0].pedra.l1)
-            //        {
-            //            regras[i].l2 = pedra.l2;
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    for (int i = 0; i < regras.Count; i++)
-            //    {
-            //        if (regras[i].l1 == pedra.l1)
-            //        {
-            //            regras[i].l2 = tabuleiro[tabuleiro.Count - 1].pedra.l2;
-            //            i = regras.Count;
-            //        }
-            //    }
-            //    for (int i = 0; i < regras.Count; i++)
-            //    {
-            //        if (regras[i].l1 == tabuleiro[tabuleiro.Count - 1].pedra.l2)
-            //        {
-            //            regras[i].l2 = pedra.l1;
-            //        }
-            //    }
-            //}
+            if (jogadorA.listaPedras.Count == 0)
+            {
+                return 'A';
+            }
+            else
+            {
+                if (jogadorB.listaPedras.Count == 0)
+                {
+                    return 'B';
+                }
+                else
+                {
+                    if (domino.Count == 0)
+                    {
+                        if (jogadorA.jogadasPossiveis(this, 'E').Count == 0 && jogadorA.jogadasPossiveis(this, 'D').Count == 0 &&
+                            jogadorB.jogadasPossiveis(this, 'E').Count == 0 && jogadorB.jogadasPossiveis(this, 'D').Count == 0 &&
+                            jogadorA.listaPedras.Count(p => p.adap) == 0 && jogadorB.listaPedras.Count(p => p.adap) == 0)
+                        {
+                            int somaA = 0, somaB = 0;
+                            foreach (Pedra pedra in jogadorA.listaPedras)
+                            {
+                                somaA += pedra.l1 + pedra.l2;
+                            }
+                            foreach (Pedra pedra in jogadorB.listaPedras)
+                            {
+                                somaB += pedra.l1 + pedra.l2;
+                            }
+                            if (somaA == somaB)
+                            {
+                                return 'C';
+                            }
+                            else
+                            {
+                                if (somaA > somaB)
+                                {
+                                    return 'B';
+                                }
+                                else
+                                {
+                                    return 'B';
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return 'D';
         }
     }
 }

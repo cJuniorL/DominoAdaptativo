@@ -30,10 +30,11 @@ namespace DominoAdap.Forms
             lsbJogador2.SelectedValue = "id";
             lsbJogador1.DisplayMember = "visualizarPeca";
             lsbJogador2.DisplayMember = "visualizarPeca";
-            lsbDomino.DisplayMember = "visualizarPeca";
+            //lsbDomino.DisplayMember = "visualizarPeca";
             lsbTabuleiro.DisplayMember = "visualizarJogada";
+            lsbTabuleiro.ColumnWidth = 55;
             lsbRegras.DisplayMember = "visualizarRegra";
-            lsbDomino.ColumnWidth = 40;
+            //lsbDomino.ColumnWidth = 40;
         }
 
         private List<int> verificarPedrasAdap()
@@ -101,14 +102,21 @@ namespace DominoAdap.Forms
         {
             int pos = selecionarIndiceAleatorio(lstIndices.Count);
             Pedra pedra = jogadorB.retornarPedra(pos);
+            pos = lstIndices[pos];
             if (pedra.adap && controle.verficarQuantidadePedra() > 0)
             {
-                controle.alterarRegra(pedra, direito);
-                lsbRegras.DataSource = controle.regras.ToList();
+                Jogada jogada = new Jogada(controle, pedra, jogadorB);
+                if (direito)
+                    jogada.alterarRegra(false);
+                else
+                    jogada.alterarRegra(true);
+                jogadorB.jogarPedra(controle, jogada, pos, direito);
             }
-            pos = lstIndices[pos]; //Indetifica a posição da pedra na mão do Jogador
-            Jogada jogada = new Jogada(controle, jogadorB.retornarPedra(pos), jogadorB);
-            jogadorB.jogarPedra(controle, jogada, pos, direito);
+            else
+            {
+                Jogada jogada = new Jogada(jogadorB.retornarPedra(pos), jogadorB);
+                jogadorB.jogarPedra(controle, jogada, pos, direito);
+            }
             habilitarJogadaA(true);
             atualizarTudo();
 
@@ -129,7 +137,7 @@ namespace DominoAdap.Forms
             lsbJogador1.DataSource = jogadorA.listaPedras.ToList();
             jogadorB.carregarPedras(controle);
             lsbJogador2.DataSource = jogadorB.listaPedras.ToList();
-            lsbDomino.DataSource = controle.domino.ToList();
+            //lsbDomino.DataSource = controle.domino.ToList();
             lsbRegras.DataSource = controle.regras.ToList();
             habilitarJogadaA(false);
             if (controle.definirOrdem(jogadorA, jogadorB) == 'A')
@@ -152,51 +160,30 @@ namespace DominoAdap.Forms
 
         private void atualizarTudo()
         {
-            lsbDomino.DataSource = controle.domino.ToList();
+            //lsbDomino.DataSource = controle.domino.ToList();
             lsbJogador1.DataSource = jogadorA.listaPedras.ToList();
             lsbJogador2.DataSource = jogadorB.listaPedras.ToList();
             lsbTabuleiro.DataSource = controle.tabuleiro.ToList();
-            if (jogadorA.listaPedras.Count == 0)
+            if (controle.verficarQuantidadePedra() > 0)
             {
-                MessageBox.Show("O jogador 1 ganhou!", "Jogo Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }
-            else
-            {
-                if (jogadorB.listaPedras.Count == 0)
+                char ganhador = controle.verficarGanhador(jogadorA, jogadorB);
+                if (ganhador != 'D')
                 {
-                    MessageBox.Show("O jogador 2 ganhou!", "Jogo Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                }
-                else
-                {
-                    if (controle.domino.Count == 0)
+                    if (ganhador == 'A')
                     {
-                        if (jogadorA.jogadasPossiveis(controle, 'E').Count == 0 && jogadorA.jogadasPossiveis(controle, 'D').Count == 0 &&
-                            jogadorB.jogadasPossiveis(controle, 'E').Count == 0 && jogadorB.jogadasPossiveis(controle, 'D').Count == 0 && 
-                            jogadorA.listaPedras.Count(p => p.adap) == 0 && jogadorB.listaPedras.Count(p => p.adap) == 0)
+                        MessageBox.Show("O jogador 1 ganhou!", "Jogo Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                    else
+                    {
+                        if (ganhador == 'B')
                         {
-                            int somaA = 0, somaB = 0;
-                            foreach (Pedra pedra in jogadorA.listaPedras)
+                            MessageBox.Show("O computador ganhou! Pratique mais.", "Jogo Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        else
+                        {
+                            if (ganhador == 'C')
                             {
-                                somaA += pedra.l1 + pedra.l2;
-                            }
-                            foreach (Pedra pedra in jogadorB.listaPedras)
-                            {
-                                somaB += pedra.l1 + pedra.l2;
-                            }
-                            if (somaA == somaB)
-                            {
-                                MessageBox.Show("Houve um empate no jogo !", "Jogo Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                            }
-                            else
-                            {
-                                if (somaA > somaB)
-                                {
-                                    MessageBox.Show("O jogador 1 ganhou!", "Jogo Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("O jogador 2 ganhou!", "Jogo Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                                }
+                                MessageBox.Show("Houve um empate!", "Jogo Finalizado", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                             }
                         }
                     }

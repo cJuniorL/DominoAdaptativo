@@ -17,23 +17,22 @@ namespace DominoAdap.Modelo
             get
             {
                 if (!adap)
-                    return l1 + " | " + l2 + " ";
+                    return "[" + l1 + " - " + l2 + "]";
                 else
-                    return l1 + " | " + l2 + "* ";
+                    return "[" + l1 + " - " + l2 + "]*";
             }
         }
         public string fAdapAnt { get; set; }
         public string fAdapPos { get; set; }
 
-        public Pedra invertePedra()
+        public void invertePedra()
         {
-            int aux = this.l1;
-            this.l1 = this.l2;
-            this.l2 = aux;
-            return this;
+            int aux = l1;
+            l1 = l2;
+            l2 = aux;
         }
 
-        public Pedra verificarLadoCerto(Domino domino, bool lado)
+        public void verificarLadoCerto(Domino domino, bool lado)
         {
             int tamanho = domino.verficarQuantidadePedra();
             if (tamanho > 0)
@@ -42,21 +41,15 @@ namespace DominoAdap.Modelo
                 {
                     ////if (l1 != domino.tabuleiro[tamanho - 1].pedra.l2)
                     if (domino.regras.Count(l => l.l1 == l2 && l.l2 == domino.tabuleiro[tamanho - 1].pedra.l2) > 0)
-                        return invertePedra();
-                    else
-                        return this;
+                        invertePedra();
                 }
                 else
                 {
                     //if (l2 != domino.tabuleiro[0].pedra.l1)
                     if (domino.regras.Count(l => l.l1 == l1 && l.l2 == domino.tabuleiro[0].pedra.l1) > 0)
-                        return invertePedra();
-                    else
-                        return this;
+                        invertePedra();
                 }
             }
-            else
-                return this;
         }
     }
 }

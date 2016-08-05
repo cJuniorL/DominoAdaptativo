@@ -8,7 +8,7 @@ namespace DominoAdap.Modelo
 {
     public class Jogada
     {
-        public Pedra pedra { get; set; }
+        public Pedra pedra { get; set; }    
         public Jogador jogador { get; set; }
         Domino domino;
 
@@ -42,6 +42,7 @@ namespace DominoAdap.Modelo
                     if (domino.regras[i].l1 == domino.tabuleiro[0].pedra.l1)
                     {
                         domino.regras[i].l2 = pedra.l2;
+                        i = domino.regras.Count;
                     }
                 }
             }
@@ -60,12 +61,12 @@ namespace DominoAdap.Modelo
                     if (domino.regras[i].l1 == domino.tabuleiro[domino.tabuleiro.Count - 1].pedra.l2)
                     {
                         domino.regras[i].l2 = pedra.l1;
+                        i = domino.regras.Count;
                     }
                 }
             }
         }
 
-
-        virtual public string visualizarJogada { get { return "|" + pedra.l1 + " | " + pedra.l2 + "|"; } }
+        virtual public string visualizarJogada { get { return " [" + pedra.l1 + " - " + pedra.l2 + " ]"; } }
     }
 }

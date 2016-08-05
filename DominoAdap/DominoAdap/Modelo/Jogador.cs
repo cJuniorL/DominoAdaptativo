@@ -9,22 +9,21 @@ namespace DominoAdap.Modelo
     public class Jogador
     {
         public List<Pedra> listaPedras = new List<Pedra>();
-      
 
-        public void carregarPedras(Domino controle)
+
+        public void carregarPedras(Domino domino)
         {
             for (int i = 0; i < 7; i++)
             {
-                listaPedras.Add(controle.domino[0]);
-                controle.domino.RemoveAt(0);
+                listaPedras.Add(domino.domino[0]);
+                domino.domino.RemoveAt(0);
             }
-            //listaPedras = listaPedras.OrderBy(p => p.id).ToList();
         }
 
-        public void comprarPedras(Domino controle)
+        public void comprarPedras(Domino domino)
         {
-            listaPedras.Add(controle.domino[0]);
-            controle.domino.RemoveAt(0);
+            listaPedras.Add(domino.domino[0]);
+            domino.domino.RemoveAt(0);
         }
 
         public void limparPedras()
@@ -42,19 +41,14 @@ namespace DominoAdap.Modelo
             listaPedras.RemoveAt(index);
         }
 
-        public void jogarPedra(Domino domino, Jogada jogada, int pos, bool ladoDireito)
+        public void jogarPedra(Domino domino, Jogada jogada, int pos, bool lado)
         {
-            jogada.pedra = jogada.pedra.verificarLadoCerto(domino, ladoDireito);
-            if (ladoDireito)
+            jogada.pedra.verificarLadoCerto(domino, lado);
+            if (lado)
                 domino.inserirTabuleiroLado2(jogada);
             else
                 domino.inserirTabuleiroLado1(jogada);
             removerPedra(pos);
-        }
-
-        public List<Pedra> selecionarPedras()
-        {
-            return listaPedras;
         }
 
         public List<int> jogadasPossiveis()
@@ -75,39 +69,27 @@ namespace DominoAdap.Modelo
         public List<int> jogadasPossiveis(Domino domino, char lado)
         {
             List<int> lstIndices = new List<int>();
-            if (domino.verficarQuantidadePedra() > 0)
+            int pl;
+            if (lado == 'E')
+                pl = domino.tabuleiro[0].pedra.l1;  //Verifica o valor da ponta do tabuleiro
+            else
+                pl = domino.tabuleiro[domino.tabuleiro.Count - 1].pedra.l2;
+            Pedra pedra = new Pedra();
+            int dest;
+            for (int i = 0; i < listaPedras.Count; i++)
             {
-                int pl;
-                if (lado == 'E')
-                    pl = domino.tabuleiro[0].pedra.l1;  //Verifica o valor da ponta do tabuleiro
+                pedra = retornarPedra(i);
+                dest = domino.regras.First(r => r.l1 == pedra.l1).l2; //Verifica qual é a combinação do lado 1 da pedra
+                if (dest == pl)
+                    lstIndices.Add(i);
                 else
-                    pl = domino.tabuleiro[domino.tabuleiro.Count - 1].pedra.l2;
-                Pedra pedra = new Pedra();
-                int dest;
-                for (int i = 0; i < listaPedras.Count; i++)
                 {
-                    pedra = retornarPedra(i);
-                    dest = domino.regras.First(r => r.l1 == pedra.l1).l2; //Verifica qual é a combinação do lado 1 da pedra
+                    dest = domino.regras.First(r => r.l1 == pedra.l2).l2;//Verifica qual é a combinação do lado 2 da pedra
                     if (dest == pl)
                         lstIndices.Add(i);
-                    else
-                    {
-                        dest = domino.regras.First(r => r.l1 == pedra.l2).l2;//Verifica qual é a combinação do lado 2 da pedra
-                        if (dest == pl)
-                            lstIndices.Add(i);
-                    }
                 }
-                return lstIndices;
             }
-            else {
-                return null;
-            }
-            
-        }
-
-        public bool vencedor()
-        {
-            return true;
+            return lstIndices;
         }
     }
 }
