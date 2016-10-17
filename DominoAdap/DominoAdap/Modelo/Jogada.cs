@@ -16,7 +16,6 @@ namespace DominoAdap.Modelo
         {
             this.domino = domino;
             this.pedra = pedra;
-            this.jogador = jogador;
         }
 
         public Jogada(Pedra pedra, Jogador jogador)
