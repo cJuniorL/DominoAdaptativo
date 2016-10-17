@@ -99,6 +99,12 @@
             this.ilsAdapL2 = new System.Windows.Forms.ImageList(this.components);
             this.ilsVertL1 = new System.Windows.Forms.ImageList(this.components);
             this.ilsVertL2 = new System.Windows.Forms.ImageList(this.components);
+            this.p26l2 = new System.Windows.Forms.PictureBox();
+            this.p26l1 = new System.Windows.Forms.PictureBox();
+            this.p27l1 = new System.Windows.Forms.PictureBox();
+            this.p27l2 = new System.Windows.Forms.PictureBox();
+            this.p28l1 = new System.Windows.Forms.PictureBox();
+            this.p28l2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.p1l2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p1l1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p2l2)).BeginInit();
@@ -150,6 +156,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.p5l2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p6l1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.p6l2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p26l2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p26l1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p27l1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p27l2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p28l1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p28l2)).BeginInit();
             this.SuspendLayout();
             // 
             // lsbJogador1
@@ -157,10 +169,10 @@
             this.lsbJogador1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsbJogador1.FormattingEnabled = true;
             this.lsbJogador1.ItemHeight = 25;
-            this.lsbJogador1.Location = new System.Drawing.Point(17, 63);
+            this.lsbJogador1.Location = new System.Drawing.Point(17, 38);
             this.lsbJogador1.Margin = new System.Windows.Forms.Padding(4);
             this.lsbJogador1.Name = "lsbJogador1";
-            this.lsbJogador1.Size = new System.Drawing.Size(159, 154);
+            this.lsbJogador1.Size = new System.Drawing.Size(159, 179);
             this.lsbJogador1.TabIndex = 0;
             this.lsbJogador1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.lsbJogador1_DrawItem);
             // 
@@ -270,7 +282,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 30);
+            this.label3.Location = new System.Drawing.Point(12, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(90, 26);
             this.label3.TabIndex = 12;
@@ -367,6 +379,12 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.SeaGreen;
+            this.panel1.Controls.Add(this.p28l1);
+            this.panel1.Controls.Add(this.p28l2);
+            this.panel1.Controls.Add(this.p27l1);
+            this.panel1.Controls.Add(this.p27l2);
+            this.panel1.Controls.Add(this.p26l2);
+            this.panel1.Controls.Add(this.p26l1);
             this.panel1.Controls.Add(this.p16l2);
             this.panel1.Controls.Add(this.p16l1);
             this.panel1.Controls.Add(this.p15l2);
@@ -420,7 +438,7 @@
             this.panel1.Location = new System.Drawing.Point(17, 267);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1487, 344);
+            this.panel1.Size = new System.Drawing.Size(1487, 439);
             this.panel1.TabIndex = 74;
             // 
             // p16l2
@@ -867,12 +885,66 @@
             this.ilsVertL2.Images.SetKeyName(5, "p5l2.png");
             this.ilsVertL2.Images.SetKeyName(6, "p6l2.png");
             // 
+            // p26l2
+            // 
+            this.p26l2.Location = new System.Drawing.Point(15, 303);
+            this.p26l2.Margin = new System.Windows.Forms.Padding(4);
+            this.p26l2.Name = "p26l2";
+            this.p26l2.Size = new System.Drawing.Size(65, 60);
+            this.p26l2.TabIndex = 68;
+            this.p26l2.TabStop = false;
+            // 
+            // p26l1
+            // 
+            this.p26l1.Location = new System.Drawing.Point(15, 248);
+            this.p26l1.Margin = new System.Windows.Forms.Padding(4);
+            this.p26l1.Name = "p26l1";
+            this.p26l1.Size = new System.Drawing.Size(65, 60);
+            this.p26l1.TabIndex = 67;
+            this.p26l1.TabStop = false;
+            // 
+            // p27l1
+            // 
+            this.p27l1.Location = new System.Drawing.Point(15, 363);
+            this.p27l1.Margin = new System.Windows.Forms.Padding(4);
+            this.p27l1.Name = "p27l1";
+            this.p27l1.Size = new System.Drawing.Size(60, 54);
+            this.p27l1.TabIndex = 69;
+            this.p27l1.TabStop = false;
+            // 
+            // p27l2
+            // 
+            this.p27l2.Location = new System.Drawing.Point(75, 363);
+            this.p27l2.Margin = new System.Windows.Forms.Padding(4);
+            this.p27l2.Name = "p27l2";
+            this.p27l2.Size = new System.Drawing.Size(60, 54);
+            this.p27l2.TabIndex = 70;
+            this.p27l2.TabStop = false;
+            // 
+            // p28l1
+            // 
+            this.p28l1.Location = new System.Drawing.Point(136, 363);
+            this.p28l1.Margin = new System.Windows.Forms.Padding(4);
+            this.p28l1.Name = "p28l1";
+            this.p28l1.Size = new System.Drawing.Size(60, 54);
+            this.p28l1.TabIndex = 71;
+            this.p28l1.TabStop = false;
+            // 
+            // p28l2
+            // 
+            this.p28l2.Location = new System.Drawing.Point(196, 363);
+            this.p28l2.Margin = new System.Windows.Forms.Padding(4);
+            this.p28l2.Name = "p28l2";
+            this.p28l2.Size = new System.Drawing.Size(60, 54);
+            this.p28l2.TabIndex = 72;
+            this.p28l2.TabStop = false;
+            // 
             // frmJogoDomino
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightGray;
-            this.ClientSize = new System.Drawing.Size(1538, 622);
+            this.ClientSize = new System.Drawing.Size(1538, 745);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -942,6 +1014,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.p5l2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p6l1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.p6l2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p26l2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p26l1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p27l1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p27l2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p28l1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.p28l2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1018,5 +1096,11 @@
         private System.Windows.Forms.ImageList ilsAdapL2;
         private System.Windows.Forms.ImageList ilsVertL1;
         private System.Windows.Forms.ImageList ilsVertL2;
+        private System.Windows.Forms.PictureBox p28l1;
+        private System.Windows.Forms.PictureBox p28l2;
+        private System.Windows.Forms.PictureBox p27l1;
+        private System.Windows.Forms.PictureBox p27l2;
+        private System.Windows.Forms.PictureBox p26l2;
+        private System.Windows.Forms.PictureBox p26l1;
     }
 }

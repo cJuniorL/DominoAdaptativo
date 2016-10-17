@@ -152,8 +152,9 @@ namespace DominoAdap.Forms
         private void jogadaComputador(List<int> lstIndices, bool direito)
         {
             int pos = selecionarIndiceAleatorio(lstIndices.Count);
-            Pedra pedra = jogadorB.retornarPedra(pos);
             pos = lstIndices[pos];
+            Pedra pedra = jogadorB.retornarPedra(pos);
+
             if (pedra.adap && controle.verficarQuantidadePedra() > 0)
             {
                 Jogada jogada = new Jogada(controle, pedra, jogadorB);

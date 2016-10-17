@@ -22,8 +22,11 @@ namespace DominoAdap.Modelo
 
         public void comprarPedras(Domino domino)
         {
-            listaPedras.Add(domino.domino[0]);
-            domino.domino.RemoveAt(0);
+            if (domino.domino.Count > 0)
+            {
+                listaPedras.Add(domino.domino[0]);
+                domino.domino.RemoveAt(0);
+            }
         }
 
         public void limparPedras()
